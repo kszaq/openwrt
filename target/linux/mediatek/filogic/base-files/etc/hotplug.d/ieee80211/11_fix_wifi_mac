@@ -119,6 +119,7 @@ case "$board" in
 		[ "$PHYNBR" = "1" ] && macaddr_setbit_la $(macaddr_add $addr 1) > /sys${DEVPATH}/macaddress
 		;;
 	dlink,aquila-pro-ai-m30-a1|\
+	dlink,aquila-pro-ai-m30-a1-ubootmod|\
 	dlink,aquila-pro-ai-m60-a1)
 		part=$(find_mtd_part "Odm")
 		# locate the MAC record header, the MAC follows it
