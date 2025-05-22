@@ -27,6 +27,27 @@ preinit_set_mac_address() {
 		ip link set dev eth0 address "$addr"
 		ip link set dev eth1 address "$addr"
 		;;
+	dlink,aquila-pro-ai-m30-a1|\
+	dlink,aquila-pro-ai-m30-a1-ubootmod)
+		part=$(find_mtd_part "Odm")
+		[ -n "$part" ] && model=$(dd if=$part bs=1 skip=64 count=6)
+		case "$model" in
+			M30/CP)
+				wan_mac=$(mtd_get_mac_binary "Odm" 0x87)
+				lan_mac=$(macaddr_add $wan_mac 1)
+				ip link set dev internet address "$wan_mac"
+				ip link set eth0 down
+				ip link set dev eth0 address "$lan_mac"
+				ip link set eth0 up
+				ip link set dev lan1 address "$lan_mac"
+				ip link set dev lan2 address "$lan_mac"
+				ip link set dev lan3 address "$lan_mac"
+				ip link set dev lan4 address "$lan_mac"
+				;;
+			*)
+				;;
+		esac
+		;;
 	mercusys,mr90x-v1|\
 	tplink,archer-ax80-v1|\
 	tplink,re6000xd)
