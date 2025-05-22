@@ -39,6 +39,7 @@ preinit_set_mac_address() {
 		ip link set dev eth1 address "$addr"
 		;;
 	dlink,aquila-pro-ai-m30-a1|\
+	dlink,aquila-pro-ai-m30-a1-ubootmod|\
 	dlink,aquila-pro-ai-m60-a1)
 		part=$(find_mtd_part "Odm")
 		# locate the MAC record header, the MAC follows it
