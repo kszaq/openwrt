@@ -40,7 +40,8 @@ preinit_set_mac_address() {
 		;;
 	dlink,aquila-pro-ai-m30-a1|\
 	dlink,aquila-pro-ai-m30-a1-ubootmod|\
-	dlink,aquila-pro-ai-m60-a1)
+	dlink,aquila-pro-ai-m60-a1|\
+	dlink,aquila-pro-ai-m60-a1-ubootmod)
 		part=$(find_mtd_part "Odm")
 		# locate the MAC record header, the MAC follows it
 		hex=$(hexdump -ve '1/1 "%.2x"' -n 256 "$part")
